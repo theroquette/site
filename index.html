@@ -1,1 +1,200 @@
-test
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roquette</title>
+
+    <!-- Open Graph: what social platforms see when they crawl the link -->
+    <meta property="og:title" content="Roquette — Model · New York">
+    <meta property="og:description" content="International model. Always traveling, always single.">
+    <meta property="og:image" content="images/roquette-at-club.jpg">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://roquette.ai">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400&display=swap" rel="stylesheet">
+
+    <style>
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+        }
+
+        body {
+            background: #0a0a0a;
+            color: #e8e4df;
+            font-family: 'Jost', 'Futura', 'Century Gothic', sans-serif;
+            font-weight: 300;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .page {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* ── Hero ── */
+        .hero {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 7;
+            overflow: hidden;
+        }
+
+        .hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 70% 20%;
+            display: block;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40%;
+            background: linear-gradient(to top, #0a0a0a, transparent);
+            pointer-events: none;
+        }
+
+        /* ── Content ── */
+        .content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 3rem 1.5rem 4rem;
+            text-align: center;
+        }
+
+        .name {
+            font-size: clamp(1.8rem, 5vw, 3rem);
+            font-weight: 300;
+            letter-spacing: 0.45em;
+            text-transform: uppercase;
+            margin-bottom: 0.6rem;
+        }
+
+        .tagline {
+            font-size: clamp(0.75rem, 2vw, 0.9rem);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #9a9590;
+            margin-bottom: 2.5rem;
+        }
+
+        .bio {
+            max-width: 480px;
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #c4bfb8;
+            margin-bottom: 3rem;
+        }
+
+        /* ── Links ── */
+        .links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .links a {
+            display: inline-block;
+            padding: 0.75rem 2.2rem;
+            font-family: 'Jost', 'Futura', 'Century Gothic', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 400;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .link-primary {
+            background: #e8e4df;
+            color: #0a0a0a;
+        }
+
+        .link-primary:hover {
+            background: #fff;
+        }
+
+        .link-secondary {
+            border: 1px solid #3a3835;
+            color: #9a9590;
+        }
+
+        .link-secondary:hover {
+            border-color: #6a6560;
+            color: #e8e4df;
+        }
+
+        /* ── Footer ── */
+        .footer {
+            padding: 2rem 1.5rem;
+            text-align: center;
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: #3a3835;
+        }
+
+        /* ── Mobile ── */
+        @media (max-width: 640px) {
+            .hero {
+                aspect-ratio: 16 / 10;
+            }
+
+            .content {
+                padding: 2rem 1.25rem 3rem;
+            }
+
+            .links {
+                flex-direction: column;
+                width: 100%;
+                max-width: 280px;
+            }
+
+            .links a {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="hero">
+            <img src="images/roquette-at-club.jpg" alt="Roquette at an event">
+        </div>
+
+        <div class="content">
+            <h1 class="name">Roquette</h1>
+            <p class="tagline">Model · New York</p>
+            <p class="bio">
+                25, always traveling, always single. You'll usually find me at a fashion show, an art event, a club, or on a plane to somewhere that tastes better than yesterday.
+            </p>
+
+            <div class="links">
+                <a href="https://www.fanvue.com/roquette" class="link-primary" target="_blank" rel="noopener">Exclusive Content</a>
+                <a href="https://www.instagram.com/roquette.lefeuvre/" class="link-secondary" target="_blank" rel="noopener">Instagram</a>
+            </div>
+        </div>
+
+        <div class="footer">
+            AI generated · roquette.ai
+        </div>
+    </div>
+</body>
+</html>
