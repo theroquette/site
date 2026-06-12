@@ -35,106 +35,20 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* ── Age Gate ── */
-        .age-gate {
-            position: fixed;
-            inset: 0;
-            z-index: 1000;
-            background: #0a0a0a;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 2rem;
-        }
-
-        .age-gate.hidden {
-            display: none;
-        }
-
-        .age-gate-inner {
-            max-width: 380px;
-        }
-
-        .age-gate-title {
-            font-size: clamp(1.6rem, 4vw, 2.4rem);
-            font-weight: 300;
-            letter-spacing: 0.4em;
-            text-transform: uppercase;
-            margin-bottom: 0.5rem;
-        }
-
-        .age-gate-subtitle {
-            font-size: 0.8rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: #9a9590;
-            margin-bottom: 2rem;
-        }
-
-        .age-gate-prompt {
-            font-size: 0.95rem;
-            line-height: 1.7;
-            color: #c4bfb8;
-            margin-bottom: 2.5rem;
-        }
-
-        .age-gate-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-        }
-
-        .age-gate-buttons button {
-            padding: 0.8rem 2.5rem;
-            font-family: 'Jost', 'Futura', 'Century Gothic', sans-serif;
-            font-size: 0.8rem;
-            font-weight: 400;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: none;
-        }
-
-        .btn-enter {
-            background: #e8e4df;
-            color: #0a0a0a;
-        }
-
-        .btn-enter:hover {
-            background: #fff;
-        }
-
-        .btn-leave {
-            background: transparent;
-            border: 1px solid #3a3835 !important;
-            color: #9a9590;
-        }
-
-        .btn-leave:hover {
-            border-color: #6a6560 !important;
-            color: #e8e4df;
-        }
-
-        .age-gate-footer {
-            margin-top: 2.5rem;
+        /* ── Legal ── */
+        .legal {
             font-size: 0.6rem;
             letter-spacing: 0.12em;
             text-transform: uppercase;
             color: #3a3835;
-            line-height: 1.8;
+            margin-bottom: 1.5rem;
         }
 
-        /* ── Main page (hidden until verified) ── */
+        /* ── Main page ── */
         .page {
             min-height: 100vh;
-            display: none;
-            flex-direction: column;
-        }
-
-        .page.visible {
             display: flex;
+            flex-direction: column;
         }
 
         /* ── Hero ── */
@@ -287,41 +201,13 @@
                 padding: 0.65rem 1.8rem;
             }
 
-            .age-gate-buttons {
-                flex-direction: column;
-                width: 100%;
-                max-width: 260px;
-                margin: 0 auto;
-            }
-
-            .age-gate-buttons button {
-                width: 100%;
-            }
         }
     </style>
 </head>
 <body>
 
-    <!-- Portfolio gate -->
-    <div class="age-gate" id="ageGate">
-        <div class="age-gate-inner">
-            <h1 class="age-gate-title">Roquette</h1>
-            <p class="age-gate-subtitle">Model · New York</p>
-            <p class="age-gate-prompt">
-                Welcome to my portfolio. By continuing, you confirm that you're of legal age in your jurisdiction.
-            </p>
-            <div class="age-gate-buttons">
-                <button class="btn-enter" onclick="enterSite()">Enter</button>
-                <button class="btn-leave" onclick="leaveSite()">Leave</button>
-            </div>
-            <p class="age-gate-footer">
-                AI generated · roquette.ai
-            </p>
-        </div>
-    </div>
-
     <!-- Main page -->
-    <div class="page" id="mainPage">
+    <div class="page">
         <div class="hero">
             <img src="images/roquette-at-club.jpg" alt="Roquette at an event">
         </div>
@@ -335,6 +221,8 @@
 
             <p class="teaser">NYFW Part 3 with Sable — streaming now</p>
 
+            <p class="legal">By continuing, you confirm that you're of legal age in your jurisdiction.</p>
+
             <div class="links">
                 <a href="https://www.fanvue.com/roquette/fv-1" class="link-primary" target="_blank" rel="noopener">Exclusive Content</a>
                 <a href="https://www.instagram.com/roquette.lefeuvre/" class="link-secondary" target="_blank" rel="noopener">Instagram</a>
@@ -345,24 +233,6 @@
             AI generated · roquette.ai
         </div>
     </div>
-
-    <script>
-        // Check if already verified this session
-        if (sessionStorage.getItem('ageVerified')) {
-            document.getElementById('ageGate').classList.add('hidden');
-            document.getElementById('mainPage').classList.add('visible');
-        }
-
-        function enterSite() {
-            sessionStorage.setItem('ageVerified', 'true');
-            document.getElementById('ageGate').classList.add('hidden');
-            document.getElementById('mainPage').classList.add('visible');
-        }
-
-        function leaveSite() {
-            window.location.href = 'https://www.google.com';
-        }
-    </script>
 
 </body>
 </html>
