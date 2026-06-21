@@ -414,7 +414,7 @@
                     muted
                     loop
                     playsinline
-                    preload="metadata">
+                    preload="auto">
                     <source src="viddies/teaser.mp4" type="video/mp4">
                 </video>
                 <span class="tap-hint">▶ Go deeper</span>
@@ -517,13 +517,25 @@
 <script>
     (function () {
         var video = document.getElementById('teaser');
-        if (video) {
+        if (!video) return;
+
+        video.muted = true;
+        video.playsInline = true;
+
+        function tryPlay() {
             var p = video.play();
             if (p && p.catch) { p.catch(function(){}); }
-            video.addEventListener('error', function () {
-                video.style.display = 'none';
-            });
         }
+
+        if (video.readyState >= 2) {
+            tryPlay();
+        } else {
+            video.addEventListener('canplay', tryPlay, { once: true });
+        }
+
+        video.addEventListener('error', function () {
+            video.style.display = 'none';
+        });
     })();
 </script>
 </body>
