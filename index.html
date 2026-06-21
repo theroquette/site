@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Roquette</title>
 
-    <!-- Open Graph: what social platforms see when they crawl the link -->
+    <!-- Open Graph -->
     <meta property="og:title" content="Roquette LeFeuvre">
     <meta property="og:description" content="Model. Traveler. Sometimes trouble.">
     <meta property="og:image" content="https://roquette.ai/images/roquette-at-club.jpg">
@@ -14,7 +14,7 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
 
     <style>
         *, *::before, *::after {
@@ -23,9 +23,7 @@
             box-sizing: border-box;
         }
 
-        html, body {
-            height: 100%;
-        }
+        html, body { height: 100%; }
 
         body {
             background: #0a0a0a;
@@ -35,56 +33,101 @@
             -webkit-font-smoothing: antialiased;
         }
 
-        /* ── Legal ── */
-        .legal {
-            font-size: 0.6rem;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: #9a9590;
-            margin-bottom: 1.5rem;
-        }
-
-        /* ── Main page ── */
+        /* ── PAGE ── */
         .page {
             min-height: 100vh;
             display: flex;
             flex-direction: column;
         }
 
-        /* ── Hero ── */
+        /* ── HERO / VIDEO (4:5 portrait) ── */
         .hero {
             position: relative;
+            display: block;
             width: 100%;
-            height: 55vh;
+            max-width: 460px;
+            margin: 0 auto;
+            aspect-ratio: 4 / 5;
             overflow: hidden;
+            background: #050505;
+            cursor: pointer;
+            text-decoration: none;
         }
-
-        .hero img {
+        .hero-video {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background:
+                radial-gradient(130% 80% at 50% 30%, #1a1a1c 0%, #0d0d0e 55%, #050505 100%);
+        }
+        .hero-video video {
+            position: absolute;
+            inset: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            object-position: 70% 20%;
-            display: block;
+            z-index: 3;
+            background: #050505;
         }
-
-        .hero::after {
-            content: '';
+        .hero-video::before {
+            content: "";
             position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 40%;
-            background: linear-gradient(to top, #0a0a0a, transparent);
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(232,228,223,0.05) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(232,228,223,0.05) 1px, transparent 1px);
+            background-size: 48px 48px;
+            mask-image: radial-gradient(60% 60% at 50% 45%, #000, transparent 78%);
+            -webkit-mask-image: radial-gradient(60% 60% at 50% 45%, #000, transparent 78%);
+        }
+        .play {
+            position: relative;
+            z-index: 2;
+            width: 72px; height: 72px;
+            border-radius: 50%;
+            border: 1px solid rgba(232,228,223,0.55);
+            background: rgba(232,228,223,0.06);
+            display: flex; align-items: center; justify-content: center;
+            transition: background 0.3s ease, transform 0.3s ease;
+            cursor: pointer;
+        }
+        .hero-video:hover .play { background: rgba(232,228,223,0.14); transform: scale(1.05); }
+        .play::after {
+            content: "";
+            border-left: 17px solid #e8e4df;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            margin-left: 5px;
+        }
+        .tap-hint {
+            position: absolute;
+            bottom: 14px; right: 14px;
+            z-index: 4;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            background: rgba(10,10,10,0.55);
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+            border: 1px solid rgba(232,228,223,0.25);
+            border-radius: 999px;
+            padding: 0.4rem 0.85rem;
+            font-family: 'Jost', sans-serif;
+            font-size: 0.6rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: #e8e4df;
             pointer-events: none;
         }
 
-        /* ── Content ── */
+        /* ── CONTENT ── */
         .content {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 2rem 1.5rem 3rem;
+            padding: 2.8rem 1.5rem 2rem;
+            max-width: 540px;
+            margin: 0 auto;
             text-align: center;
         }
 
@@ -93,7 +136,7 @@
             font-weight: 300;
             letter-spacing: 0.45em;
             text-transform: uppercase;
-            margin-bottom: 0.6rem;
+            margin-bottom: 0.4rem;
         }
 
         .tagline {
@@ -101,136 +144,387 @@
             letter-spacing: 0.2em;
             text-transform: uppercase;
             color: #9a9590;
-            margin-bottom: 1.5rem;
-        }
-
-        .bio {
-            max-width: 480px;
-            font-size: 1rem;
-            line-height: 1.7;
-            color: #c4bfb8;
             margin-bottom: 2rem;
         }
 
-        /* ── Teaser ── */
-        .teaser {
-            font-size: 0.8rem;
-            letter-spacing: 0.15em;
+        .headline {
+            font-size: clamp(1.4rem, 4.8vw, 2.4rem);
+            font-weight: 300;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            line-height: 1.25;
+            padding-left: 0.2em;
+            margin-bottom: 0.4rem;
+        }
+        .headline .stays {
+            font-weight: 400;
+            color: #e8e4df;
+        }
+        .headline .until {
+            display: block;
+            font-size: clamp(0.66rem, 2.2vw, 0.86rem);
+            letter-spacing: 0.34em;
             text-transform: uppercase;
             color: #9a9590;
-            margin-bottom: 1.5rem;
+            margin-top: 1rem;
+            padding-left: 0.34em;
+            font-weight: 300;
         }
 
-        /* ── Links ── */
-        .links {
+        .bio {
+            max-width: 500px;
+            font-size: 1rem;
+            line-height: 1.75;
+            color: #c4bfb8;
+            margin: 2rem auto 0;
+        }
+
+        .cities {
+            font-size: 0.74rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: #9a9590;
+            margin-top: 1.8rem;
+        }
+
+        /* ── WHAT'S INSIDE ── */
+        .inside {
+            padding: 3rem 1.5rem;
+            max-width: 540px;
+            margin: 0 auto;
+            border-top: 1px solid #1a1a1a;
+        }
+        .inside-label {
+            font-size: 0.72rem;
+            letter-spacing: 0.28em;
+            text-transform: uppercase;
+            color: #9a9590;
+            margin-bottom: 2.4rem;
+            text-align: center;
+        }
+        .inside-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        .inside-item {
             display: flex;
-            gap: 1.5rem;
-            flex-wrap: wrap;
-            justify-content: center;
+            gap: 1.2rem;
+            align-items: flex-start;
+        }
+        .inside-icon {
+            flex-shrink: 0;
+            width: 44px;
+            height: 44px;
+            border: 1px solid #2a2a28;
+            display: flex;
             align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: #c4bfb8;
+            margin-top: 0.15rem;
+        }
+        .inside-text h3 {
+            font-size: 0.88rem;
+            font-weight: 400;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: #e8e4df;
+            margin-bottom: 0.45rem;
+        }
+        .inside-text p {
+            font-size: 0.88rem;
+            line-height: 1.65;
+            color: #9a9590;
+            font-weight: 300;
         }
 
-        .links a {
+        /* ── IMAGE GALLERY ── */
+        .gallery {
+            padding: 2.5rem 0 1rem;
+            max-width: 540px;
+            margin: 0 auto;
+        }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3px;
+        }
+        .gallery-grid a {
+            display: block;
+            aspect-ratio: 4 / 5;
+            overflow: hidden;
+            position: relative;
+        }
+        .gallery-grid img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+        .gallery-grid a:hover img {
+            transform: scale(1.03);
+        }
+        .gallery-grid a::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 35%;
+            background: linear-gradient(to top, rgba(10,10,10,0.7) 0%, transparent 100%);
+            pointer-events: none;
+        }
+        .gallery-tease {
+            text-align: center;
+            margin-top: 1.2rem;
+            font-size: 0.72rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #6a6560;
+        }
+
+        /* ── CTA ── */
+        .cta-section {
+            padding: 2.5rem 1.5rem 3rem;
+            text-align: center;
+            max-width: 540px;
+            margin: 0 auto;
+        }
+        .cta-headline {
+            font-size: clamp(1rem, 3.5vw, 1.5rem);
+            font-weight: 300;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            margin-bottom: 0.6rem;
+        }
+        .cta-sub-text {
+            font-size: 0.85rem;
+            color: #9a9590;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+        .link-primary {
             display: inline-block;
-            font-family: 'Jost', 'Futura', 'Century Gothic', sans-serif;
+            font-family: inherit;
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            text-decoration: none;
+            background: #e8e4df;
+            color: #0a0a0a;
+            padding: 1.05rem 3.2rem;
+            font-size: 0.9rem;
+            transition: background 0.3s ease;
+        }
+        .link-primary:hover { background: #fff; }
+
+        .link-secondary {
+            display: inline-block;
+            font-family: inherit;
             font-weight: 400;
             letter-spacing: 0.18em;
             text-transform: uppercase;
             text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .link-primary {
-            background: #e8e4df;
-            color: #0a0a0a;
-            padding: 1rem 3rem;
-            font-size: 0.9rem;
-        }
-
-        .link-primary:hover {
-            background: #fff;
-        }
-
-        .link-secondary {
             border: 1px solid #3a3835;
             color: #9a9590;
             padding: 0.65rem 1.8rem;
             font-size: 0.75rem;
+            transition: all 0.3s ease;
         }
-
         .link-secondary:hover {
             border-color: #6a6560;
             color: #e8e4df;
         }
 
-        /* ── Footer ── */
+        .cta-fine {
+            margin-top: 1rem;
+            font-size: 0.68rem;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: #6a6560;
+        }
+
+        .cta-links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin-top: 1.2rem;
+        }
+
+        /* ── FOOTER ── */
         .footer {
-            padding: 2rem 1.5rem;
+            padding: 2.4rem 1.5rem 3rem;
             text-align: center;
-            font-size: 0.65rem;
-            letter-spacing: 0.15em;
+            border-top: 1px solid #1a1a1a;
+        }
+        .footer-disclosure {
+            max-width: 600px;
+            margin: 0 auto 1.6rem;
+            font-size: 0.66rem;
+            line-height: 1.7;
+            letter-spacing: 0.03em;
+            color: #6a6560;
+            text-transform: none;
+        }
+        .footer-mark {
+            font-size: 0.62rem;
+            letter-spacing: 0.18em;
             text-transform: uppercase;
             color: #3a3835;
         }
 
-        /* ── Mobile ── */
         @media (max-width: 640px) {
-            .hero {
-                height: 45vh;
-            }
-
-            .content {
-                padding: 2rem 1.25rem 3rem;
-            }
-
-            .links {
+            .content { padding: 2rem 1.25rem 1.5rem; }
+            .inside { padding: 2.5rem 1.25rem; }
+            .link-primary { padding: 1rem 2.6rem; }
+            .cta-links {
                 flex-direction: column;
                 width: 100%;
                 max-width: 280px;
+                margin-left: auto;
+                margin-right: auto;
             }
-
-            .links a {
-                text-align: center;
-            }
-
-            .link-primary {
-                padding: 1rem 2.5rem;
-            }
-
-            .link-secondary {
-                padding: 0.65rem 1.8rem;
-            }
-
+            .cta-links a { text-align: center; }
         }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-video:hover .play { transform: none; }
+            .gallery-grid img { transition: none; }
+        }
+
+        :focus-visible { outline: 2px solid #e8e4df; outline-offset: 3px; }
     </style>
 </head>
 <body>
 
-    <!-- Main page -->
     <div class="page">
-        <div class="hero">
-            <img src="images/roquette-at-club.jpg" alt="Roquette at an event">
-        </div>
 
+        <!-- HERO VIDEO -->
+        <a class="hero" href="https://fanvue.com/roquette/fv-3" target="_blank" rel="noopener" aria-label="Watch — free access">
+            <div class="hero-video" aria-label="Teaser">
+                <div class="play"></div>
+                <video
+                    id="teaser"
+                    poster="poster.jpg"
+                    autoplay
+                    muted
+                    loop
+                    playsinline
+                    preload="metadata">
+                    <source src="teaser.mp4" type="video/mp4">
+                </video>
+                <span class="tap-hint">▶ Go deeper</span>
+            </div>
+        </a>
+
+        <!-- HEADLINE + STORY -->
         <div class="content">
             <h1 class="name">Roquette</h1>
             <p class="tagline">Model · New York</p>
+
+            <h2 class="headline">
+                What happens at Fashion&nbsp;Week
+                <span class="stays">stays</span> at Fashion&nbsp;Week
+                <span class="until">— until now</span>
+            </h2>
+
             <p class="bio">
-                25, always traveling. You'll usually find me at a fashion show, an art event, a club, or on a plane to somewhere that tastes better than yesterday.
+                I'm R. Model, front-row regular, backstage fixture, terrible influence. I go places I probably shouldn't with people I definitely shouldn't and I don't delete anything. This is where all of it ends up.
             </p>
 
-            <p class="teaser">New York · Paris · Milan</p>
+            <p class="cities">New York · Paris · Milan · London · Tokyo</p>
+        </div>
 
-            <div class="links">
-                <a href="https://www.fanvue.com/roquette" class="link-primary" target="_blank" rel="noopener">See More</a>
+        <!-- WHAT'S INSIDE -->
+        <div class="inside">
+            <div class="inside-label">What you get</div>
+            <div class="inside-grid">
+                <div class="inside-item">
+                    <div class="inside-icon">💬</div>
+                    <div class="inside-text">
+                        <h3>Talk to me</h3>
+                        <p>I answer. Ask me anything — what I'm wearing, where I'm going, what happened last night. I have opinions and I'm not shy about them. I take requests too.</p>
+                    </div>
+                </div>
+                <div class="inside-item">
+                    <div class="inside-icon">📸</div>
+                    <div class="inside-text">
+                        <h3>More facials than a luxury spa</h3>
+                        <p>Me and my friends at Fashion Week, on rooftops, in five-star hotels, on yachts, in boutiques, at restaurants where we definitely misbehaved. Full editorial shoots, candid moments, the whole world I move through.</p>
+                    </div>
+                </div>
+                <div class="inside-item">
+                    <div class="inside-icon">🎬</div>
+                    <div class="inside-text">
+                        <h3>Videos you won't find anywhere else</h3>
+                        <p>Backstage at the shows. Getting ready with my best friend. The guy from the afterparty. What happens when the door closes and the camera stays on.</p>
+                    </div>
+                </div>
+                <div class="inside-item">
+                    <div class="inside-icon">🔥</div>
+                    <div class="inside-text">
+                        <h3>It escalates</h3>
+                        <p>I start polished. I don't stay that way. The people I meet, the trouble I find, and the places it goes — Fashion Week after dark, the way you imagined it.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- GALLERY PREVIEW -->
+        <div class="gallery">
+            <div class="gallery-grid">
+                <a href="https://fanvue.com/roquette/fv-3" target="_blank" rel="noopener">
+                    <img src="pic1.jpg" alt="" loading="lazy">
+                </a>
+                <a href="https://fanvue.com/roquette/fv-3" target="_blank" rel="noopener">
+                    <img src="pic2.jpg" alt="" loading="lazy">
+                </a>
+                <a href="https://fanvue.com/roquette/fv-3" target="_blank" rel="noopener">
+                    <img src="pic3.jpg" alt="" loading="lazy">
+                </a>
+                <a href="https://fanvue.com/roquette/fv-3" target="_blank" rel="noopener">
+                    <img src="pic4.jpg" alt="" loading="lazy">
+                </a>
+            </div>
+            <p class="gallery-tease">Hundreds more inside</p>
+        </div>
+
+        <!-- BOTTOM CTA -->
+        <div class="cta-section">
+            <div class="cta-headline">See all of me</div>
+            <p class="cta-sub-text">Free to follow. No credit card. Just click.</p>
+            <a href="https://fanvue.com/roquette/fv-3" class="link-primary" target="_blank" rel="noopener">Go deeper</a>
+            <p class="cta-fine">Free preview · Paid tiers available</p>
+            <div class="cta-links">
                 <a href="https://www.instagram.com/roquette.lefeuvre/" class="link-secondary" target="_blank" rel="noopener">Instagram</a>
             </div>
         </div>
 
+        <!-- FOOTER -->
         <div class="footer">
-            AI generated · roquette.ai
+            <p class="footer-disclosure">
+                Everything here is generated with AI — no real people, no real performers, no real events. Any resemblance to actual persons, brands, or fashion events is coincidental. Adults only.
+            </p>
+            <div class="footer-mark">AI generated · roquette.ai</div>
         </div>
+
     </div>
 
+<script>
+    (function () {
+        var video = document.getElementById('teaser');
+        if (video) {
+            var p = video.play();
+            if (p && p.catch) { p.catch(function(){}); }
+            video.addEventListener('error', function () {
+                video.style.display = 'none';
+            });
+        }
+    })();
+</script>
 </body>
 </html>
